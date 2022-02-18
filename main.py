@@ -37,7 +37,8 @@ def fill_pdf(pdf: object, form_dict: dict):
                         i.update(pdfrw.PdfDict(AP=""))
                         i.update(pdfrw.PdfDict(V=form_dict[key]))
                         i.update(pdfrw.PdfDict(AS=form_dict[key]))
-    
+
+    # TODO  - Writes to <date>.pdf 
     pdfrw.PdfWriter().write('filled_form.pdf', pdf)
 
 def print_values(form_fields):
@@ -53,7 +54,6 @@ def print_values(form_fields):
 #Read pdf create dict
 pdf_template = pdfrw.PdfReader('Example.pdf')
 pdf_template.Root.AcroForm.update(pdfrw.PdfDict(NeedAppearances=pdfrw.PdfObject("true")))
-#pdf_template = pdfrw.PdfReader('Example.pdf')
 form_fields = get_form_field_names(pdf_template)
 
 
@@ -73,7 +73,7 @@ form_fields[' \(Week One\) 1 Hour Lunch'] = True
 
 
 
-
+# Print the form fields: values extracted from given pdf.
 print_values(form_fields)
 fill_pdf(pdf_template, form_fields)
 
